@@ -29,9 +29,9 @@ public:
 
 	//print
 	void print(){
-		cout << "Title: " << title << endl;
-		cout << "Writer: " << writer << endl;
-		cout << "Year: " << year << endl;
+		cout << "Movie Title: " << title << endl;
+		cout << "Screenwriter: " << writer << endl;
+		cout << "Year Released: " << year << endl;
 	}
 };
 
@@ -40,7 +40,7 @@ int main(){
 	vector<Movie> movies;
 
 	//declare temp variables
-	string n, w;
+	string t, w;
 	int y;
 	Movie temp;
 
@@ -53,12 +53,25 @@ int main(){
 	}
 
 	//populate movies vector
-	while (!in.eof()){
-
+	while (!in.eof()) {
+		getline(in, t);
+		temp.setTitle(t);
+		in >> y;
+		in.ignore();
+		temp.setYear(y);
+		getline(in, w);
+		temp.setWriter(w);
+		movies.push_back(temp);
 	}
 
 	//close file
 	in.close();
+
+	//display vector contents
+	for (Movie m : movies) {
+		m.print();
+		cout << endl;
+	}
 
 	return 0;
 }
